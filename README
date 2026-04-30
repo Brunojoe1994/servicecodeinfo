@@ -1,3 +1,11 @@
+
+ChatGPT
+Open the ChatGPT app
+Try the full app experience
+
+Open
+
+
 servicecodeinfo
 ===============
 
@@ -29,3 +37,166 @@ Changelog
 2013-09-17 - Converted into buildable package for posting and easy compilation
              by Kim Davies <kim.davies@icann.org>
 
+It looks like you’ve pasted the README-style description of a small C utility called servicecodeinfo. Let me break down what it does and how you can actually use or build it 👇
+
+🔍 What this program does
+servicecodeinfo analyzes DCCP Service Codes (from RFC 4340) and tells you:
+
+The numeric value of the service code
+
+Its ASCII representation (if applicable)
+
+The allocation policy (e.g., FCFS, Specification Required)
+
+DCCP (Datagram Congestion Control Protocol) uses these service codes to identify application-level services.
+
+🧠 Key concept
+Service codes are 32-bit values that can be:
+
+Entered as numbers (5, 1717858426)
+
+Entered as ASCII strings (HTTP, fdpz)
+
+The tool converts between them and shows how they’re classified.
+
+⚙️ How to compile it
+If you have the .c file (e.g., servicecodeinfo.c), compile with:
+
+gcc -o servicecodeinfo servicecodeinfo.c
+▶️ How to run it
+1. Using numeric service codes:
+./servicecodeinfo 5 1717858426 0x48545450
+2. Using ASCII names:
+./servicecodeinfo -n fdpz RA
+📊 Example output explained
+Service Code           ASCII   Allocation Policy
+---------------------- -----   ---------------------------------
+1213486160             HTTP    Specification Required
+1213486160 → numeric representation
+
+HTTP → ASCII interpretation
+
+Specification Required → policy defined by IANA
+
+🧾 Allocation policies (quick meaning)
+Policy	Meaning
+FCFS (First Come First Serve)	Anyone can register it
+Specification Required	Needs documented specification
+Private / Reserved	Not publicly assignable
+🧩 When this is useful
+Working with low-level networking (DCCP)
+
+Debugging or analyzing protocol traffic
+
+Studying IANA service code assignments
+
+⚠️ Reality check
+DCCP is rarely used in modern systems, so unless you're working on:
+
+kernel/network stack development
+
+academic research
+
+legacy systems
+
+…you probably won’t encounter these often.
+
+If you want, I can:
+
+Help you get the actual source code
+
+Modify this tool (e.g., add JSON output, integrate with scripts)
+
+Or explain how to map these codes directly from RFC tables 👍
+
+
+Write a readme for GitHub without using pretty print 
+
+Here’s a clean, GitHub-ready README written in plain Markdown (no “pretty print” blocks or extra formatting tricks):
+
+servicecodeinfo
+servicecodeinfo is a small C utility that analyzes DCCP service codes (as defined in RFC 4340) and displays their ASCII representation along with their allocation policy.
+
+Overview
+DCCP service codes are 32-bit identifiers used to indicate application-level services. These codes can be represented either as numeric values or as ASCII strings.
+
+This tool allows you to:
+
+Input service codes as numbers or names
+
+Convert between numeric and ASCII representations
+
+Identify the allocation policy associated with each code
+
+Features
+Accepts decimal and hexadecimal numeric inputs
+
+Accepts ASCII service code names
+
+Displays allocation policy (e.g., FCFS, Specification Required)
+
+Simple and portable C implementation
+
+Requirements
+C compiler (e.g., gcc or clang)
+
+POSIX-compatible system recommended (Linux, macOS, etc.)
+
+Compilation
+Compile the program using:
+
+gcc -o servicecodeinfo servicecodeinfo.c
+
+Usage
+Run the program with numeric service codes:
+
+./servicecodeinfo NUMBER [NUMBER...]
+
+Or use the -n flag to specify ASCII names:
+
+./servicecodeinfo -n NAME [NAME...]
+
+Examples
+./servicecodeinfo 5 1717858426 0x48545450
+
+./servicecodeinfo -n fdpz RA
+
+Output
+The program prints a table with the following columns:
+
+Service Code (numeric value)
+
+ASCII representation (if applicable)
+
+Allocation Policy
+
+Example output:
+
+Service Code ASCII Allocation Policy
+
+5 First Come First Serve (FCFS)
+1717858426 fdpz First Come First Serve (FCFS)
+1213486160 HTTP Specification Required
+
+Allocation Policies
+First Come First Serve (FCFS): Open registration
+
+Specification Required: Requires formal documentation
+
+Reserved or Private: Not available for public use
+
+Background
+DCCP (Datagram Congestion Control Protocol) is a transport protocol designed for applications that require congestion control without reliable delivery. Service codes are used during connection setup to identify the intended service.
+
+Changelog
+2005-08-30
+Original program by Eddie Kohler
+
+2013-09-17
+Converted into a buildable package by Kim Davies
+
+License
+Check the source file for licensing details.
+
+Notes
+DCCP is not widely used in modern applications, so this tool is mainly useful for research, networking experimentation, or legacy system analysis.
